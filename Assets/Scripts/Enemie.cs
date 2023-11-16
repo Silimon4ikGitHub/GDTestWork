@@ -9,10 +9,12 @@ public class Enemie : MonoBehaviour
     public float Damage;
     public float AtackSpeed;
     public float AttackRange = 2;
+    public float PushForse;
 
 
     public Animator AnimatorController;
     public NavMeshAgent Agent;
+    public Rigidbody[] rigidbodys;
 
     private float lastAttackTime = 0;
     private bool isDead = false;
@@ -22,7 +24,6 @@ public class Enemie : MonoBehaviour
     {
         SceneManager.Instance.AddEnemie(this);
         Agent.SetDestination(SceneManager.Instance.Player.transform.position);
-
     }
 
     private void Update()
@@ -66,7 +67,16 @@ public class Enemie : MonoBehaviour
     {
         SceneManager.Instance.RemoveEnemie(this);
         isDead = true;
-        AnimatorController.SetTrigger("Die");
+        AnimatorController.enabled = false;
+        foreach (var rb in rigidbodys)
+        {
+            rb.AddForce(transform.position * PushForse);
+        }
+        
+        //for Animation
+        //AnimatorController.SetTrigger("Die");
+
+
     }
 
 }

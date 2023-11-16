@@ -13,6 +13,7 @@ public class SceneManager : MonoBehaviour
     public GameObject Lose;
     public GameObject Win;
     public GameObject LvlUpPanel;
+    public AudioSource lvlUpSound;
     public TextMeshProUGUI CurrentWaveTMP;
 
     private int currWave = 0;
@@ -72,6 +73,7 @@ public class SceneManager : MonoBehaviour
         }
         currWave++;
         CurrentWaveTMP.text = currWave.ToString();
+        lvlUpSound.Play();
     }
 
     public void UpPlayerHealth(float addHP)
@@ -79,6 +81,7 @@ public class SceneManager : MonoBehaviour
         Player.Hp += addHP;
         Player.IncreaseScale();
         LvlUpPanel.SetActive(false);
+        Player.AttackRange += 1;
         lvl++;
     }
 
@@ -91,7 +94,7 @@ public class SceneManager : MonoBehaviour
 
     public void UpPlayerAttackSpeed(float addSpeed)
     {
-        Player.AtackSpeed -= addSpeed;
+        Player.AtackSpeed *= addSpeed;
         LvlUpPanel.SetActive(false);
         lvl++;
     }
