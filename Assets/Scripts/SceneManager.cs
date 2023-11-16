@@ -17,7 +17,7 @@ public class SceneManager : MonoBehaviour
     public TextMeshProUGUI CurrentWaveTMP;
 
     private int currWave = 0;
-    public int lvl = 1;
+    private int lvl = 1;
     [SerializeField] private LevelConfig Config;
 
     private void Awake()

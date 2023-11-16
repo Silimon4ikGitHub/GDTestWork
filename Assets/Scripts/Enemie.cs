@@ -17,7 +17,7 @@ public class Enemie : MonoBehaviour
     public Rigidbody[] rigidbodys;
 
     private float lastAttackTime = 0;
-    private bool isDead = false;
+    public bool isDead = false;
 
 
     private void Start()
@@ -63,7 +63,7 @@ public class Enemie : MonoBehaviour
 
 
 
-    private void Die()
+    public virtual void Die()
     {
         SceneManager.Instance.RemoveEnemie(this);
         isDead = true;
@@ -75,8 +75,6 @@ public class Enemie : MonoBehaviour
         
         //for Animation
         //AnimatorController.SetTrigger("Die");
-
-
     }
 
 }
